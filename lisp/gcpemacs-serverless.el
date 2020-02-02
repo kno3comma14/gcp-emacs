@@ -42,4 +42,6 @@
 (defun create-functions-event-types-list-data ()
   (let ((rows (call-command-without-headers gcloud-functions-event-types-list-command)))
     (mapcar  #'create-single-functions-event-types-list-data rows)))
+
+(provide 'gcpemacs-serverless)
   
