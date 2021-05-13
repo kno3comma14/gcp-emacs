@@ -41,13 +41,14 @@
 (setq gcloud-functions-regions-list-command "gcloud functions regions list")
 (setq gcloud-functions-event-types-list-command "gcloud functions event-types list")
 (setq gcloud-functions-list-command-keys '("NAME" "STATUS" "TRIGGER" "REGION"))
+(require 'cl)
 
 (defun call-command-without-headers (x)
   "Execute a given x command and remove the headers"
   (butlast (cdr (split-string (shell-command-to-string x) "\n")) 1))
 
 (defun create-single-functions-list-data (x)
-  (let ((values (split-string x))
+  (let ((values (split-string x "\\\s\\\s\\\s*"))
 	(function_map (make-hash-table :test 'equal)))
     (puthash "NAME" (nth 0 values) function_map)
     (puthash "STATUS" (nth 1 values) function_map)
