@@ -45,7 +45,7 @@
 
 (defun call-command-without-headers (x)
   "Execute a given x command and remove the headers"
-  (butlast (cdr (split-string (shell-command-to-string x) "\n")) 1))
+  (butlast (cdr (split-string x "\n")) 1))
 
 (defun create-single-functions-list-data (x)
   (let ((values (split-string x "\\\s\\\s\\\s*"))
@@ -73,15 +73,15 @@
     function_map))
 
 (defun create-functions-list-data ()
-  (let ((rows (call-command-without-headers gcloud-functions-list-command)))
+  (let ((rows (call-command-without-headers (shell-command-to-string gcloud-functions-list-command))))
     (mapcar #'create-single-functions-list-data rows)))
 
 (defun create-functions-regions-list-data ()
-  (let ((rows (call-command-without-headers gcloud-functions-regions-list-command)))
+  (let ((rows (call-command-without-headers (shell-command-to-string cloud-functions-regions-list-command))))
     (mapcar  #'create-single-functions-regions-list-data rows)))
 
 (defun create-functions-event-types-list-data ()
-  (let ((rows (call-command-without-headers gcloud-functions-event-types-list-command)))
+  (let ((rows (call-command-without-headers (shell-command-to-string cloud-functions-event-types-list-command))))
     (mapcar  #'create-single-functions-event-types-list-data rows)))
 
 (provide 'gcpemacs-serverless)

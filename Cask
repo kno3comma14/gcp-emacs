@@ -6,4 +6,5 @@
 (development
  (depends-on "package-lint")
  (depends-on "ert")
- (depends-on "ert-runner"))
+ (depends-on "ert-runner")
+ (depends-on "el-mock"))
